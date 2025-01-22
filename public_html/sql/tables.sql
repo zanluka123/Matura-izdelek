@@ -4,9 +4,9 @@ CREATE TABLE IF NOT EXISTS users (
     lastName VARCHAR(100) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     is_active TINYINT NOT NULL DEFAULT 1
-)
+);
 
 INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `created`, `is_active`) VALUES
 (1, 'Matej', 'Mencin', 'matejmatik@outlook.com', '6bd870c2e3126ad8467fc45872c4e4bf', '2025-01-19 17:58:10', 1),
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     is_finished TINYINT NOT NULL DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users(id)
-)
+);
 
 INSERT INTO `tasks` (`id`, `user_id`, `description`, `created`, `is_finished`) VALUES
 (1, 1, 'Popravi teste.', '2025-01-15 19:08:28', 0),
