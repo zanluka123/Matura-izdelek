@@ -1,0 +1,61 @@
+services:
+  # Apache and PHP service
+  website:
+    build: .
+    container_name: ${STACK_NAME}-${PHP_CONTAINER_NAME}
+    restart: always
+    ports:
+      - "${PHP_PORT}:80"
+    volumes:
+      - ./public_html:/var/www/html
+    develop:
+      watch:
+        - action: sync
+          path: ./public_html
+          target: /var/www/html
+          ignore:
+            - .venv/
+        - action: rebuild
+          path: .
+    networks:
+      - my-network
+  # MySQL service
+  mysql:
+    image: mysql:8.0
+    restart: always
+    networks:
+      - my-network
+    ports:
+      - "${MYSQL_PORT}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  # phpMyAdmin service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: ${STACK_NAME}-${PHPMYADMIN_CONTAINER_NAME}
+    restart: always
+    networks:
+      - my-network
+    ports:
+      - "${PHPMYADMIN_PORT}:80"
+    environment:
+      PMA_HOST: ${MYSQL_CONTAINER_NAME}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - mysql
+
+# Define networks
+networks:
+  my-network:
+    name: ${STACK_NAME}-network
+volumes:
+  mysql-data:
+    name: ${STACK_NAME}-mysql-data
+
+    
