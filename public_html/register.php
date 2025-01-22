@@ -7,6 +7,7 @@ if(isset($_POST['signUp'])){
     $lastName=$_POST['lName'];
     $email=$_POST['email'];
     $password=$_POST['password'];
+    /* Sifriranje gesla */
     $password=md5($password);
 
      $checkEmail="SELECT * From users where email='$email'";

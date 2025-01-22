@@ -1,6 +1,6 @@
 <?php
 $host="mysql";
-$user="root";
+$user="zan_luka";
 $pass="skrivnost";
 $db="izdelek_matura";
 $conn=new mysqli($host,$user,$pass,$db);
