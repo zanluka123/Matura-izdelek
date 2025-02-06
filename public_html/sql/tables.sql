@@ -8,11 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
     is_active TINYINT NOT NULL DEFAULT 1
 );
 
-INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `created`, `is_active`) VALUES
-(1, 'Matej', 'Mencin', 'matejmatik@outlook.com', '6bd870c2e3126ad8467fc45872c4e4bf', '2025-01-19 17:58:10', 1),
-(2, 'Jani', 'Novak', 'janez.novak@gmail.com', '6bd870c2e3126ad8467fc45872c4e4bf', '2025-01-20 18:07:50', 1),
-(3, 'Mari', 'Kovač', 'mari.kovac@yahoo.com', '6bd870c2e3126ad8467fc45872c4e4bf', '2025-01-22 18:08:21', 1);
-
 CREATE TABLE IF NOT EXISTS tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
@@ -21,6 +16,11 @@ CREATE TABLE IF NOT EXISTS tasks (
     is_finished TINYINT NOT NULL DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `created`, `is_active`) VALUES
+(1, 'Matej', 'Mencin', 'matejmatik@outlook.com', '6bd870c2e3126ad8467fc45872c4e4bf', '2025-01-19 17:58:10', 1),
+(2, 'Jani', 'Novak', 'janez.novak@gmail.com', '6bd870c2e3126ad8467fc45872c4e4bf', '2025-01-20 18:07:50', 1),
+(3, 'Mari', 'Kovač', 'mari.kovac@yahoo.com', '6bd870c2e3126ad8467fc45872c4e4bf', '2025-01-22 18:08:21', 1);
 
 INSERT INTO `tasks` (`id`, `user_id`, `description`, `created`, `is_finished`) VALUES
 (1, 1, 'Popravi teste.', '2025-01-15 19:08:28', 0),
