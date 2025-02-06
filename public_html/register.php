@@ -2,6 +2,7 @@
 
 include 'connect.php';
 
+# Registracija uporabnika
 if(isset($_POST['signUp'])){
     $firstName=$_POST['fName'];
     $lastName=$_POST['lName'];
@@ -19,7 +20,7 @@ if(isset($_POST['signUp'])){
         $insertQuery="INSERT INTO users(firstName,lastName,email,password)
                        VALUES ('$firstName','$lastName','$email','$password')";
             if($conn->query($insertQuery)==TRUE){
-                header("location: index.php");
+                header("Location: index.php");
             }
             else{
                 echo "Error:".$conn->error;
@@ -29,6 +30,7 @@ if(isset($_POST['signUp'])){
 
 }
 
+# Prijava uporabnika
 if(isset($_POST['signIn'])){
    $email=$_POST['email'];
    $password=$_POST['password'];
@@ -40,6 +42,7 @@ if(isset($_POST['signIn'])){
     session_start();
     $row=$result->fetch_assoc();
     $_SESSION['email']=$row['email'];
+    $_SESSION['id']=$row['id'];
     header("Location: homepage.php");
     exit();
    }

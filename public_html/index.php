@@ -1,3 +1,9 @@
+<?php
+/* Zagon seje */
+session_start();
+/* Vkljucitev povezave na bazo */
+include("connect.php");
+?>
 
 <html lang="en">
 <head>
@@ -8,7 +14,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Obrazec za prijavo in registracijo -->
     <div class="container" id="signup" style="display:none;">
+      <!-- Obrazec za registracijo -->
       <h1 class="form-title">Ustvarite račun</h1>
       <form method="post" action="register.php">
         <div class="input-group">
@@ -33,13 +41,13 @@
         </div>
        <input type="submit" class="btn" value="Ustvarite račun" name="signUp">
       </form>
-     
+  
       <div class="links">
         <p>Že imate račun ?</p>
         <button id="signInButton">Prijavite se</button>
       </div>
     </div>
-
+    <!-- Obrazec za prijavo -->
     <div class="container" id="signIn">
         <h1 class="form-title">Prijava</h1>
         <form method="post" action="register.php">
